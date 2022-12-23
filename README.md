@@ -1,4 +1,4 @@
-# Procedural Quest system based on GOAP/HTN
+# Procedural Quest system based on GOAP
 
 Sources:
 https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793
