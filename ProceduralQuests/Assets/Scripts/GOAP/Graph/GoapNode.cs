@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class GoapNode : MonoBehaviour
+public class GoapNode
 {
     private GoapAction m_Action;
     private List<GoapNode> m_Connections;
 
-    public void Awake()
+    public GoapNode()
     {
         m_Connections = new List<GoapNode>();
     }

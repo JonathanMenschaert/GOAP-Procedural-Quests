@@ -1,11 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldState : MonoBehaviour
 {
+    [Serializable]
+    public struct State
+    {
+        public string WorldState;
+        public bool Value;
 
-    private Dictionary<string, GoapState> m_States;
+        public State(string WorldState, bool Value)
+        {
+            this.WorldState = WorldState;   
+            this.Value = Value;
+        }
+    }
+
+    private Dictionary<string, bool> m_States = new Dictionary<string, bool>();
 
     #region SINGLETON
 
@@ -17,10 +30,10 @@ public class WorldState : MonoBehaviour
     {
         get
         {
-            if (m_Instance && !m_ApplicationQuitting)
+            if (m_Instance == null && !m_ApplicationQuitting)
             {
                 m_Instance = FindObjectOfType<WorldState>();
-                if (m_Instance)
+                if (m_Instance == null)
                 {
                     GameObject plannerObject = new GameObject(m_SingleTonInstance);
                     m_Instance = plannerObject.AddComponent<WorldState>();
@@ -39,7 +52,7 @@ public class WorldState : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if (m_Instance)
+        if (m_Instance == null)
         {
             m_Instance = this;
         }
@@ -48,9 +61,17 @@ public class WorldState : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        m_States = new Dictionary<string, GoapState>();
     }
 
     #endregion SINGLETON
+
+    public void RegisterState(string condition, bool value)
+    {
+        m_States.Add(condition, value);
+    }
+
+    public void UnregisterState(string condition)
+    {
+        m_States.Remove(condition);
+    }
 }

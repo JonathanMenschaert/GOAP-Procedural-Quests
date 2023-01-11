@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoapPlanner : MonoBehaviour
 {
     private List<GoapAction> m_Actions = new List<GoapAction>();
-    Dictionary<string, bool> m_States = new Dictionary<string, bool>();
+   
 
     //Initialize Singleton
     #region SINGLETON
@@ -17,10 +17,10 @@ public class GoapPlanner : MonoBehaviour
     {
         get
         {
-            if (m_Instance && !m_ApplicationQuitting)
+            if (m_Instance == null && !m_ApplicationQuitting)
             {
                 m_Instance = FindObjectOfType<GoapPlanner>();
-                if (m_Instance)
+                if (m_Instance == null)
                 {
                     GameObject plannerObject = new GameObject(m_SingleTonInstance);
                     m_Instance = plannerObject.AddComponent<GoapPlanner>();
@@ -39,7 +39,7 @@ public class GoapPlanner : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if (m_Instance)
+        if (m_Instance == null)
         {
             m_Instance = this;
         }
@@ -60,16 +60,6 @@ public class GoapPlanner : MonoBehaviour
     public void UnregisterAction(GoapAction action)
     {
         m_Actions.Remove(action);
-    }
-
-    public void RegisterState(string condition, bool value)
-    {
-        m_States.Add(condition, value);
-    }
-
-    public void UnregisterState(string condition)
-    {
-        m_States.Remove(condition);
     }
 
     public void GeneratePlan(GoapGoal goal)

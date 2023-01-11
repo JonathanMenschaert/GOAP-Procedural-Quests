@@ -13,11 +13,11 @@ public class GoapState : MonoBehaviour
 
     public void OnEnable()
     {
-        GoapPlanner.Instance.RegisterState(m_State, m_Value);
+        WorldState.Instance.RegisterState(m_State, m_Value);
     }
 
     public void OnDisable()
     {
-        GoapPlanner.Instance.UnregisterState(m_State);
+        WorldState.Instance.UnregisterState(m_State);
     }
 }
