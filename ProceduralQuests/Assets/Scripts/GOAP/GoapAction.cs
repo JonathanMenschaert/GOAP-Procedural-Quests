@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class GoapAction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnEnable()
     {
-        
+        GoapPlanner.Instance.RegisterAction(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDisable()
     {
-        
+        GoapPlanner.Instance.UnregisterAction(this);
+    }
+
+    public virtual bool IsValid()
+    {
+        return false;
+    }
+
+    public virtual int GetCost()
+    {
+        return 10000;
+    }
+
+    public virtual Dictionary<string, bool> GetEffects()
+    {
+        return new Dictionary<string, bool>();
+    }
+
+    public virtual Dictionary<string, bool> GetPreconditions()
+    {
+        return new Dictionary<string, bool>();
     }
 }
