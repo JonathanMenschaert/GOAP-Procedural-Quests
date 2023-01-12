@@ -43,10 +43,12 @@ In this project, the goal is the equivalent of a quest.
 The agent has a series of goals it needs to complete, with each goal having a priority. The agent will request a series of actions to follow from the planner based on the goal with the highest priority. The main difference from normal GOAP is that the agent is not controlled by the game, but is the player of said game. 
 
 ## Demo
-### Context
+### Implementation
 ![Quest Scene](Media/Screenshot.PNG)
 
-In this demo, a few types of goals, actions and worldstates are used:
+The implementation of the custom GOAP system is done in Unity. The npcs seen in the image hold the goals or "Quests". As soon as the player clicks on them, the goal is transferred to the "agent" or player, who then requests the Planner for a series of actions it needs to complete before the quest is completed. Once completed, the goal is removed from the player, so it can't be completed again until a npc gives it back.
+
+In this demo, a handful of goals, actions and worldstates are used to generate the quests:
 
 Actions:
 + RetrieveSword
