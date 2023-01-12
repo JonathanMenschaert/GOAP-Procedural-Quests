@@ -74,4 +74,14 @@ public class WorldState : MonoBehaviour
     {
         m_States.Remove(condition);
     }
+
+    public bool GetState(string condition) 
+    {
+        if (m_States.ContainsKey(condition))
+        {
+            return m_States[condition];
+        }
+        Debug.LogError("Invalid State!");
+        return false;
+    }
 }

@@ -32,17 +32,12 @@ public class GoapGoal : MonoBehaviour
         GoapPlanner.Instance.UnregisterGoal(m_QuestName);
     }
 
-    public void Start()
-    {
-        //GoapPlanner.Instance.GeneratePlan(this);
-    }
-
     public virtual bool IsValid()
     {
         return false;
     }
 
-    public virtual int Priority()
+    public virtual int GetPriority()
     {
         return 0;
     }

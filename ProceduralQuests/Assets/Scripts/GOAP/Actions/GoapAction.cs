@@ -48,6 +48,11 @@ public class GoapAction : MonoBehaviour
         return 10000;
     }
 
+    public virtual bool Execute()
+    {
+        return false;
+    }
+
     public virtual Dictionary<string, bool> GetEffects()
     {
         return m_Effects;

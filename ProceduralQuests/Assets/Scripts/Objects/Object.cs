@@ -22,12 +22,16 @@ public class Object : MonoBehaviour
         m_ObjectName = GetComponentInChildren<TextMeshProUGUI>();
         m_ObjectName.text = m_InputName;
 
+
     }
 
    
 
     private void OnMouseDown()
     {
-        Destroy(gameObject);
+        if (m_ShouldDestroyAfterClick)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -83,11 +83,11 @@ public class GoapPlanner : MonoBehaviour
 
     public void GeneratePlan(GoapGoal goal)
     {
-        GoapNode node = new GoapNode();
+        GoapNode node = new GoapNode(null);
         BuildPlan(ref node, goal.GetDesiredState());
     }
 
-    public GoapNode BuildPlan(ref GoapNode node, Dictionary<string, bool> conditions)
+    public bool BuildPlan(ref GoapNode node, Dictionary<string, bool> conditions)
     {
         foreach(var entry in conditions) //For each condition in the passed conditions
         {
@@ -95,19 +95,38 @@ public class GoapPlanner : MonoBehaviour
             {
                 foreach (var effect in action.GetEffects()) //For each effect in the action effects
                 {
-                    if (entry.Key == effect.Key && entry.Value == effect.Value) //If the condition and the effect match, 
+                    //If the condition of the previous action and the effect of the action match, 
+                    if (entry.Key == effect.Key && entry.Value == effect.Value) 
                     {
                         Debug.Log("BUILD NODE EFFECT: " + entry.Key);
                         Debug.Log("-------------------------");
-                        GoapNode connection = new GoapNode();
+                        GoapNode connection = new GoapNode(action);
                         BuildPlan(ref connection, action.GetPreconditions());
                         node.AddNode(connection);
                         Debug.Log("-------------------------");
                     }
                 }
             }
+            
+        }
+        if (node.Length() == 0)
+        {
+            GoapAction action = node.GetAction();
+            bool matchesWorldState = true;
+            if (action != null)
+            {
+                foreach (var entry in action.GetPreconditions())
+                {
+                    matchesWorldState = matchesWorldState && (WorldState.Instance.GetState(entry.Key) == entry.Value);
+                }
+                if (matchesWorldState)
+                {
+                    Debug.Log("Action Preconditions match world state");
+                }
+            }
+            return matchesWorldState;
         }
 
-        return node;
+        return true;
     }
 }
