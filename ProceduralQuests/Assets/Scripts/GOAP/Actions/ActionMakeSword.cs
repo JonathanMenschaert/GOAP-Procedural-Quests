@@ -12,12 +12,11 @@ public class ActionMakeSword : GoapAction
     public override bool Execute()
     {
         int amount = 0;
-        Blackboard.Instance.GetData("AmountSword", ref amount);
-        //Blackboard.Instance.ChangeData("Objective", "Retrieve Sword");
+        Blackboard.Instance.GetData("AmountMaterial", ref amount);
 
-        if (amount > 1)
+        if (amount > 0)
         {
-            WorldState.Instance.SetState("HasSword", true);
+            WorldState.Instance.SetState("SwordAvailable", true);
             return true;
         }
         return false;

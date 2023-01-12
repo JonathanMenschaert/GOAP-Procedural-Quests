@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
                     m_QuestList.RemoveAt(newGoalIdx);
                     return;
                 }
-                m_CurrentGoal = m_QuestList[newGoalIdx];   
+                m_CurrentGoal = m_QuestList[0];   
                 m_CurrentIndex = newGoalIdx;
                 m_CurrentQuest = GoapPlanner.Instance.GeneratePlan(m_CurrentGoal);
             }
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
             if (m_CurrentQuest[0].Execute())
             {
                 m_CurrentQuest.RemoveAt(0);
-                Blackboard.Instance.ChangeData("Objective", "");
+                Blackboard.Instance.ChangeData("Objective", "Quest Completed!");
             }
         }
     }

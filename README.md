@@ -50,14 +50,16 @@ In this demo, a few types of goals, actions and worldstates are used:
 
 Actions:
 + RetrieveSword
-+ MakeSword
++ AttackMonster
 
 Goals:
 + GetSword
++ DefeatMonster
 
 WorldStates
 + HasSword
 + SwordAvailable
++ HasDefeatedMonster
 
 ### GOAP in action
 [GIF]

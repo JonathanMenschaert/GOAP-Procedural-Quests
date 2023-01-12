@@ -50,7 +50,8 @@ public class Blackboard : MonoBehaviour
 
         AddData("Objective", "");
         AddData("AmountSword", 0);
-        AddData("AmountMaterial", 0);        
+        AddData("AmountMaterial", 0);
+        AddData("AmountMonster", 1);
     }
 
     public bool AddData<T>(string name, T data)
