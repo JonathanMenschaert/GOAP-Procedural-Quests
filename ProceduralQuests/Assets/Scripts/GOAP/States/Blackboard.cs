@@ -47,6 +47,8 @@ public class Blackboard : MonoBehaviour
             return;
         }
         m_Blackboard = new Dictionary<string, IDataField>();
+
+        AddData("Objective", "Test");
         
     }
 
