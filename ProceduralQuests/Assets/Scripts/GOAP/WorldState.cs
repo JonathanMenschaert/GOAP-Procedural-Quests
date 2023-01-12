@@ -11,9 +11,9 @@ public class WorldState : MonoBehaviour
         public string WorldState;
         public bool Value;
 
-        public State(string WorldState, bool Value)
+        public State(string state, bool Value)
         {
-            this.WorldState = WorldState;   
+            this.WorldState = state;   
             this.Value = Value;
         }
     }
