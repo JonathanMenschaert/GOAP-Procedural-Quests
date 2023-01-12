@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoapPlanner : MonoBehaviour
 {
     private List<GoapAction> m_Actions = new List<GoapAction>();
-   
+    private Dictionary<string, GoapGoal> m_Goals = new Dictionary<string, GoapGoal>();
 
     //Initialize Singleton
     #region SINGLETON
@@ -51,6 +51,15 @@ public class GoapPlanner : MonoBehaviour
 
     #endregion SINGLETON
 
+    public void RegisterGoal(string name, GoapGoal goal)
+    {
+        m_Goals.Add(name, goal);
+    }
+
+    public void UnregisterGoal(string name)
+    {
+        m_Goals.Remove(name);
+    }
 
     public void RegisterAction(GoapAction action)
     {
@@ -60,6 +69,16 @@ public class GoapPlanner : MonoBehaviour
     public void UnregisterAction(GoapAction action)
     {
         m_Actions.Remove(action);
+    }
+
+    public GoapGoal GetGoal(string name) 
+    {   
+        if (m_Goals.ContainsKey(name))
+        {
+            return m_Goals[name];
+        }
+        Debug.Log("Cannot find goal: " + name);
+        return null;
     }
 
     public void GeneratePlan(GoapGoal goal)

@@ -8,6 +8,9 @@ public class GoapGoal : MonoBehaviour
     protected Dictionary<string, bool> m_Conditions = new Dictionary<string, bool>();
 
     [SerializeField]
+    protected string m_QuestName;
+
+    [SerializeField]
     protected List<WorldState.State> m_FillConditions;
 
     public void Awake()
@@ -16,12 +19,22 @@ public class GoapGoal : MonoBehaviour
         {
             m_Conditions[state.WorldState] = state.Value;
         }
-        GoapPlanner.Instance.GeneratePlan(this);
+       
+    }
+
+    public void OnEnable()
+    {
+        GoapPlanner.Instance.RegisterGoal(m_QuestName, this);
+    }
+
+    public void OnDisable()
+    {
+        GoapPlanner.Instance.UnregisterGoal(m_QuestName);
     }
 
     public void Start()
     {
-        GoapPlanner.Instance.GeneratePlan(this);
+        //GoapPlanner.Instance.GeneratePlan(this);
     }
 
     public virtual bool IsValid()
