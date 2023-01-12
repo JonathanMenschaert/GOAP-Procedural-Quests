@@ -43,22 +43,45 @@ In this project, the goal is the equivalent of a quest.
 The agent has a series of goals it needs to complete, with each goal having a priority. The agent will request a series of actions to follow from the planner based on the goal with the highest priority. The main difference from normal GOAP is that the agent is not controlled by the game, but is the player of said game. 
 
 ## Demo
+### Context
+[Picture]
 
+In this demo, a few types of goals, actions and worldstates are used:
+
+Actions:
++ RetrieveSword
++ MakeSword
+
+Goals:
++ GetSword
+
+WorldStates
++ HasSword
++ SwordAvailable
+
+### GOAP in action
+[GIF]
+[GIF]
 
 
 ## Advantages and Disadvantages
 
-# Advantages
+### Advantages
 + Quests can be created dynamically. That means that if the player already did something the quest requires, the quest will automatically skip it without there being the need for additional code
 + It is very easy to add new actions, goals and worldstates and maintain the existing ones.
 
-# Disadvantages
+### Disadvantages
 - Plans need to be recalculated often, which may cause performance issues.
 - Plans may have unintended side effects if a large amount of actions exists. This can be an action putting the world in a state it cannot get out of again for example. 
 
 ## Conclusion
 
 In conclusion, GOAP can be used to generate quests procedurally. It can be stated that GOAP does not just create AI for agents controlled by the game, but it can also create an AI players have to listen to.
+
+### Further Research
+
+This project only contained simple actions and goals in a 2D point & click style game. 
+So the next step should involve making the actions and goals more complex. Perhaps even increasing the scope to a 3D environment.
 
 ## Sources and Interesting links:
 
