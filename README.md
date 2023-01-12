@@ -64,9 +64,11 @@ WorldStates
 ### GOAP in action
 
 First time we do the quest as intended, accepting the quest from the npc and then defeating the monster. 
+
 ![Quest Path 1](Media/QuestPath1.gif)
 
 Second time, we do the quest out of order. First we pick up the sword and then we go to the npc to accept the quest to defeat the monster
+
 ![Quest Path 2](Media/QuestPath2.gif)
 
 ## Advantages and Disadvantages
