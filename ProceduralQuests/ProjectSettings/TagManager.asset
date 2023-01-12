@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1003316359
+    locked: 0
+  - name: Objects
+    uniqueID: 3485241341
+    locked: 0
+  - name: QuestMarker
+    uniqueID: 1189317405
+    locked: 0
