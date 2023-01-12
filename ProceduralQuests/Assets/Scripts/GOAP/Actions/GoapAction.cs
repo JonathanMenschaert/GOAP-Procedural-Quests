@@ -40,7 +40,15 @@ public class GoapAction : MonoBehaviour
 
     public virtual bool IsValid()
     {
-        return false;
+        foreach (var entry in GetPreconditions())
+        {
+            if (WorldState.Instance.GetState(entry.Key) != entry.Value)
+            {
+                Debug.LogWarning("Action doesn't match world condition");
+                return false;
+            }
+        }
+        return true;
     }
 
     public virtual int GetCost()

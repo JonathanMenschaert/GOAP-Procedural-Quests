@@ -7,11 +7,6 @@ public class ActionRetrieveSword : GoapAction
 
     public override int GetCost()
     {
-        return base.GetCost();
-    }
-
-    public override bool IsValid()
-    {
-        return base.IsValid();
+        return 1;
     }
 }

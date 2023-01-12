@@ -28,4 +28,9 @@ public class GoapNode
     {
         return m_Action;
     }
+
+    public List<GoapNode> GetConnectedNodes()
+    {
+        return m_Connections;
+    }
 }

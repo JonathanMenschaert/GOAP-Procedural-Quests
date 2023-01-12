@@ -819,7 +819,7 @@ PrefabInstance:
       objectReference: {fileID: 4294008792630287086, guid: 3d62b12742e600e4a91ea839c6e4b921, type: 3}
     - target: {fileID: 6321842493984698875, guid: 957f162b24adde94c8a05cfe674164fa, type: 3}
       propertyPath: m_QuestNames.Array.data[0]
-      value: RetrieveSword
+      value: GetSword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 957f162b24adde94c8a05cfe674164fa, type: 3}

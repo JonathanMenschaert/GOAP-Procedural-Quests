@@ -81,19 +81,57 @@ public class GoapPlanner : MonoBehaviour
         return null;
     }
 
-    public void GeneratePlan(GoapGoal goal)
+    public List<GoapAction> GeneratePlan(GoapGoal goal)
     {
         GoapNode node = new GoapNode(null);
-        BuildPlan(ref node, goal.GetDesiredState());
+        bool isValid = BuildPlan(ref node, goal.GetDesiredState());
+
+        if (!isValid)
+        {
+            Debug.LogWarning("Could not generate Quest");
+            return null;
+        }
+
+        List<GoapAction> shortestPath = new List<GoapAction>();
+        FindShortestPath(node, ref shortestPath);
+        return shortestPath;
     }
 
-    public bool BuildPlan(ref GoapNode node, Dictionary<string, bool> conditions)
+    private int FindShortestPath(GoapNode node, ref List<GoapAction> actions)
     {
-        foreach(var entry in conditions) //For each condition in the passed conditions
+        int minCost = int.MaxValue;
+        foreach(var entry in node.GetConnectedNodes())
         {
-            foreach(var action in m_Actions) //For each action saved in the planner
+            List<GoapAction> goapActions = new List<GoapAction>();
+            int cost = FindShortestPath(entry, ref goapActions);
+
+            if (cost < minCost)
             {
-                foreach (var effect in action.GetEffects()) //For each effect in the action effects
+                actions = goapActions;
+                minCost = cost;
+
+            }
+        }
+        GoapAction action = node.GetAction();
+        if (node.GetAction() != null)
+        {
+            actions.Add(action);
+            minCost = action.GetCost();
+        }
+
+        return minCost;
+    }
+
+    private bool BuildPlan(ref GoapNode node, Dictionary<string, bool> conditions)
+    {
+        //For each condition in the passed conditions
+        foreach (var entry in conditions) 
+        {
+            //For each action saved in the planner
+            foreach (var action in m_Actions) 
+            {
+                //For each effect in the action effects
+                foreach (var effect in action.GetEffects()) 
                 {
                     //If the condition of the previous action and the effect of the action match, 
                     if (entry.Key == effect.Key && entry.Value == effect.Value) 
@@ -101,32 +139,27 @@ public class GoapPlanner : MonoBehaviour
                         Debug.Log("BUILD NODE EFFECT: " + entry.Key);
                         Debug.Log("-------------------------");
                         GoapNode connection = new GoapNode(action);
-                        BuildPlan(ref connection, action.GetPreconditions());
-                        node.AddNode(connection);
+                        bool isValid = BuildPlan(ref connection, action.GetPreconditions());
+                        if (isValid)
+                        {
+                            node.AddNode(connection);
+                        }
                         Debug.Log("-------------------------");
                     }
                 }
             }
             
         }
+
+        //Check if the action on the node matches the worldstate already
         if (node.Length() == 0)
         {
             GoapAction action = node.GetAction();
-            bool matchesWorldState = true;
             if (action != null)
             {
-                foreach (var entry in action.GetPreconditions())
-                {
-                    matchesWorldState = matchesWorldState && (WorldState.Instance.GetState(entry.Key) == entry.Value);
-                }
-                if (matchesWorldState)
-                {
-                    Debug.Log("Action Preconditions match world state");
-                }
+                return action.IsValid();
             }
-            return matchesWorldState;
         }
-
-        return true;
+        return true;        
     }
 }
