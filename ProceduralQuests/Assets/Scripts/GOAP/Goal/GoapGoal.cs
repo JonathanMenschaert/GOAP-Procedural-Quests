@@ -13,6 +13,20 @@ public class GoapGoal : MonoBehaviour
     [SerializeField]
     protected List<WorldState.State> m_FillConditions;
 
+    protected bool m_IsCompleted = false;
+
+    public bool Completed
+    {
+        get
+        {
+            return m_IsCompleted;
+        }
+        set
+        {
+            m_IsCompleted = value;
+        }
+    }
+
     public void Awake()
     {
         foreach (var state in m_FillConditions)

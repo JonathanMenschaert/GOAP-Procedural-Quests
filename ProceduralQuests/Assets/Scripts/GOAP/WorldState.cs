@@ -84,4 +84,14 @@ public class WorldState : MonoBehaviour
         Debug.LogError("Invalid State!");
         return false;
     }
+
+    public void SetState(string condition, bool value)
+    {
+        if (m_States.ContainsKey(condition))
+        {
+            m_States[condition] = value;
+            return;
+        }
+        Debug.LogError("Invalid State!");
+    }
 }

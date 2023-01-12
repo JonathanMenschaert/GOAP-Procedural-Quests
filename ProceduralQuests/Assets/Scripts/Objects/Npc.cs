@@ -34,7 +34,6 @@ public class Npc : MonoBehaviour
             if (goal != null)
             {
                 m_QuestList.Add(goal);
-                GoapPlanner.Instance.GeneratePlan(goal);
             }
         }
     }

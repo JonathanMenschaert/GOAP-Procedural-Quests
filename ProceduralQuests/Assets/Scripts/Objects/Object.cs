@@ -29,6 +29,17 @@ public class Object : MonoBehaviour
 
     private void OnMouseDown()
     {
+        int amount = 0;
+        Blackboard.Instance.GetData(m_BlackboardName, ref amount);
+        Blackboard.Instance.ChangeData(m_BlackboardName, amount + 1);
+
+        Invoke("Destroy", 0.1f);
+
+        
+    }
+
+    private void Destroy()
+    {
         if (m_ShouldDestroyAfterClick)
         {
             Destroy(gameObject);

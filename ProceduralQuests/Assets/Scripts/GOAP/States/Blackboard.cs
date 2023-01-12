@@ -48,8 +48,9 @@ public class Blackboard : MonoBehaviour
         }
         m_Blackboard = new Dictionary<string, IDataField>();
 
-        AddData("Objective", "Test");
-        
+        AddData("Objective", "");
+        AddData("AmountSword", 0);
+        AddData("AmountMaterial", 0);        
     }
 
     public bool AddData<T>(string name, T data)
